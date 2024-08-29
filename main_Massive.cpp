@@ -14,9 +14,11 @@ void Input_Command_Count(int* Commands_Count);
 void Input_Football_Mass(Football_Score_Str* Football_Mass, int Mass_Count);
 void Output_Football_Mass_Triangle(Football_Score_Str* Football_Mass,int Commands_Count);
 
-main()
+int main()
 {
     Manger_Football_Func();
+
+    return 0;
 }
 
 void Manger_Football_Func()
@@ -43,7 +45,7 @@ void Manger_Football_Func()
 void Input_Command_Count(int* Commands_Count)
 {
     printf("Enter amount of teams\n");
-    int Flag = scanf("%d", Commands_Count);
+    scanf("%d", Commands_Count);
 }
 
 //-------------------------------------------------------------------------
