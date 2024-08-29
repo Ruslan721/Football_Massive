@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <assert.h>
 
-const int Commands_Count = 5;
 
 struct Football_Score_Str
 {
@@ -10,6 +10,9 @@ struct Football_Score_Str
 };
 
 void Manger_Football_Func();
+void Input_Command_Count(int* Commands_Count);
+void Input_Football_Mass(Football_Score_Str* Football_Mass, int Mass_Count);
+void Output_Football_Mass_Triangle(Football_Score_Str* Football_Mass,int Commands_Count);
 
 main()
 {
@@ -18,21 +21,42 @@ main()
 
 void Manger_Football_Func()
 {
-      /*
+    int Commands_Count = 0;
+    Input_Command_Count(&Commands_Count);
+
+    size_t Mass_Count = Commands_Count * (Commands_Count - 1) / 2 ;
+
+    Football_Score_Str* Football_Mass = NULL;
+    Football_Mass =(Football_Score_Str*) calloc(Mass_Count, sizeof(Football_Score_Str));
+    assert(Football_Mass != NULL);
+
+    Input_Football_Mass(Football_Mass, Mass_Count);
+
+    Output_Football_Mass_Triangle(Football_Mass, Commands_Count);
+
+    free(Football_Mass);
+
+}
+
+//-------------------------------------------------------------------------
+
+void Input_Command_Count(int* Commands_Count)
+{
     printf("Enter amount of teams\n");
-    int Flag = scanf("%d", &Commands_Count); */
+    int Flag = scanf("%d", Commands_Count);
+}
 
-    size_t Mass_Count = Commands_Count * (Commands_Count - 1) / 2 ;    //иницил.;  maloc, caloc, free
+//-------------------------------------------------------------------------
 
-    Football_Score_Str* Football_Mass =(Football_Score_Str*) calloc(Mass_Count, sizeof(Football_Score_Str));
-
+void Input_Football_Mass(Football_Score_Str* Football_Mass, int Mass_Count)
+{
     int Command_1, Command_2;
-    int Flag2 = 1;
+    int Count_Of_Imput = 1;
     int i = 0;
-    while (Flag2 == 1 || i != Mass_Count  )
+    while (Count_Of_Imput == 1 || i != Mass_Count  )
     {
         printf("Enter teams numbers\n");
-        Flag2 = scanf("%d %d", &Command_1, &Command_2);
+        Count_Of_Imput = scanf("%d %d", &Command_1, &Command_2);
 
         if (Command_1 < Command_2)
         {                                           //меняем местами Command_1 и Command_2
@@ -47,13 +71,16 @@ void Manger_Football_Func()
         i++;
 
     }
+}
 
+//-------------------------------------------------------------------------
+
+void Output_Football_Mass_Triangle(Football_Score_Str* Football_Mass,int Commands_Count)
+{
     int z = 0;
-    printf("\n");
-    printf("%d\n", Mass_Count);
-    printf("All matches scores\n\n");
+    printf("\nAll matches scores\n\n");
     printf("\t0\t1\t2\t3\t4\n0");
-    i = 0;
+    int i = 0;
     while (i < Commands_Count - 1)
     {
 
@@ -71,10 +98,10 @@ void Manger_Football_Func()
         i++;
 
     }
-
-free(Football_Mass);
-
 }
+
+
 //куча и стек            \/
  //вывод треуг. таблицы  \/
+
 
